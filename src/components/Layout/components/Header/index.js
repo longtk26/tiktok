@@ -9,7 +9,6 @@ import {
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faCloudArrowUp,
     faUser,
     faCoins,
     faGear,
@@ -26,6 +25,8 @@ import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+import { UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -132,7 +133,7 @@ function Header() {
                         <>
                             <Typpy delay={[0, 200]} content="Upload video" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudArrowUp} />
+                                    <UploadIcon />
                                 </button>
                             </Typpy>
                         </>
@@ -145,10 +146,11 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f5fd5ad532a3f2b31531c25a1d16b6d1~c5_100x100.jpeg?x-expires=1670774400&x-signature=WFo72vRVoCkYdZqI0WIKOiiEsMU%3D"
+                            <Image
+                                src="https://p1-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f5fd5ad532a3f2b31531c25a1d16b6d1~c5_100x100.jpeg?x-expires=1670774400&x-signature=WFo72vRVoCkYdZqI0WIKOiiEsMU%3D"
                                 className={cx('user-avatar')}
                                 alt="Nguyen Van A"
+                                fallback="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
