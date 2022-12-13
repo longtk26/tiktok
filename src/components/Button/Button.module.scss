@@ -74,6 +74,20 @@
     }
 }
 
+.upload {
+    color: rgba(22, 24, 35, 1);
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin-right: 12px;
+    padding: 5.3px 14px;
+
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+    }
+}
+
 //Button sizes
 .small {
     min-width: 88px;
