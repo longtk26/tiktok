@@ -8,6 +8,7 @@ import styles from './Search.module.scss';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
+import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +17,7 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
+    const debounced = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
@@ -34,7 +36,8 @@ function Search() {
         } else {
             setSearchResult([]);
         }
-    }, [searchValue]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debounced]);
 
     const handleClear = () => {
         setSearchValue('');
