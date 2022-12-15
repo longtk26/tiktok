@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import HeadLessTyppy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-
 import classNames from 'classnames/bind';
-import styles from './Search.module.scss';
 
+import * as searchServices from '~/apiServices/searchServices';
+import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { useDebounce } from '~/hooks';
@@ -22,20 +22,22 @@ function Search() {
     const inputRef = useRef();
 
     useEffect(() => {
-        if (searchValue.trim()) {
-            setLoading(true);
-            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-                .then((res) => res.json())
-                .then((res) => {
-                    setSearchResult(res.data);
-                    setLoading(false);
-                })
-                .catch(() => {
-                    setLoading(false);
-                });
-        } else {
+        if (!debounced.trim()) {
             setSearchResult([]);
+            return;
         }
+
+        const fetchApi = async () => {
+            setLoading(true);
+
+            const result = await searchServices.search(debounced);
+            setSearchResult(result);
+
+            setLoading(false);
+        };
+
+        fetchApi();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debounced]);
 
